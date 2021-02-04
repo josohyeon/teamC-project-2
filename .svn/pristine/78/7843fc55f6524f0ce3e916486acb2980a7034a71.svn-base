@@ -1,0 +1,103 @@
+package trainer;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import teamC.DBM;
+import teamC.VO;
+
+public class TrainerProfilDAO {
+
+	Connection        conn;
+	PreparedStatement pstmt;
+	ResultSet         rs;
+	
+	public VO tProfilDAO(String t_id) 
+	{
+		String sql = "select t_no,t_id,t_nick,t_major,t_addr1,t_addr2,t_realP,t_originP,t_etc,t_cost1,t_cost2,t_cost3 from trainer where t_id = ?";
+		
+		DBM dbm = new DBM();
+		dbm.DBOpen();
+		conn    = dbm.getConn();
+		VO vo   = new VO();
+		try 
+		{
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, t_id);
+			rs = pstmt.executeQuery();
+			rs.next();
+			
+			vo.setT_id(rs.getString("t_id"));
+			vo.setT_no(rs.getInt("t_no"));
+			vo.setT_nick(rs.getString("t_nick"));
+			vo.setT_major(rs.getString("t_major"));
+			vo.setT_addr1(rs.getString("t_addr1"));
+			vo.setT_addr2(rs.getString("t_addr2"));
+			vo.setT_realP(rs.getString("t_realP"));
+			vo.setT_originP(rs.getString("t_originP"));
+			vo.setT_etc(rs.getString("t_etc"));
+			vo.setT_cost1(rs.getString("t_cost1"));
+			vo.setT_cost2(rs.getString("t_cost2"));
+			vo.setT_cost3(rs.getString("t_cost3"));
+			
+			String t_no = rs.getString("t_no");
+			rs.close();
+			
+			sql="select avg(p_score) as p_score from pt where t_no = '" + t_no + "' and p_state in ('b','c')";
+			
+			//통계 결과 쿼리 날려주는 부분
+			PreparedStatement pstmt2 = conn.prepareStatement(sql);
+			ResultSet rs2;
+			rs2 = pstmt2.executeQuery();
+			rs2.next();
+			vo.setT_score(rs2.getDouble("p_score"));
+			rs2.close();
+		}catch(Exception e) 
+		{
+			e.printStackTrace();
+		}finally 
+		{
+			dbm.DBClose();
+		}
+		return vo;
+	}
+	
+	public int tProfilUpdateDAO(VO vo) throws SQLException 
+	{
+		String sql  = "update trainer set ";
+			   sql += "t_major = ?, ";
+			   sql += "t_addr1 = ?, t_addr2 = ?, ";
+			   sql += "t_realP = ?, t_originP = ?, ";
+			   sql += "t_etc = ?, ";
+			   sql += "t_cost1 = ?, t_cost2 = ?, t_cost3 =? where t_id = ?";
+	
+		DBM dbm = new DBM();
+		dbm.DBOpen();
+		conn = dbm.getConn();
+		try 
+		{	
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getT_major());
+			pstmt.setString(2, vo.getT_addr1());
+			pstmt.setString(3, vo.getT_addr2());
+			pstmt.setString(4, vo.getT_realP());
+			pstmt.setString(5, vo.getT_originP());
+			pstmt.setString(6, vo.getT_etc());
+			pstmt.setString(7, vo.getT_cost1());
+			pstmt.setString(8, vo.getT_cost2());
+			pstmt.setString(9, vo.getT_cost3());
+			pstmt.setString(10, vo.getT_id());
+			return pstmt.executeUpdate();
+			
+		}catch(Exception e) 
+		{
+			e.printStackTrace();
+		}finally 
+		{
+			dbm.DBClose();
+		}
+		return 1;
+	}
+}

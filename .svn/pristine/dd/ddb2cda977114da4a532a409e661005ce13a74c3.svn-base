@@ -1,0 +1,47 @@
+package trainer;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import teamC.DBM;
+import teamC.VO;
+
+public class TrainerProfilDAO {
+
+	Connection        conn;
+	PreparedStatement pstmt;
+	ResultSet         rs;
+	
+	public VO tProfilDAO(VO vo) 
+	{
+		String sql = "";
+		
+		DBM dbm = new DBM();
+		dbm.DBOpen();
+		conn = dbm.getConn();
+		
+		try 
+		{
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getT_nick());
+			pstmt.setString(2, vo.getT_major());
+			pstmt.setString(3, vo.getT_addr1());
+			pstmt.setString(4, vo.getT_addr2());
+			pstmt.setString(5, vo.getT_photo());
+			pstmt.setString(6, vo.getT_score());
+			pstmt.setString(7, vo.getT_etc());
+			pstmt.setString(8, vo.getT_cost1());
+			pstmt.setString(9, vo.getT_cost2());
+			pstmt.setString(10, vo.getT_cost3());
+			return pstmt.executeQuery();
+			
+		}catch(Exception e) 
+		{
+			e.printStackTrace();
+		}finally 
+		{
+			dbm.DBClose();
+		}
+	}
+}

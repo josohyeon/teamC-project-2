@@ -1,0 +1,37 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+		<input type="button" id="btn1" value="1회차 " style= "width:510px; height:50px padding:10px;" onclick="Exlistopen();">
+		<input type="button" id="btn2" value="2회차 " style= "width:510px; height:50px padding:10px;" onclick="Exlistopen();">
+		<input type="button" id="btn3" value="3회차 " style= "width:510px; height:50px padding:10px;" onclick="Exlistopen();">
+		<input type="button" id="btn4" value="4회차 " style= "width:510px; height:50px padding:10px;" onclick="Exlistopen();">
+
+<% 
+/*String p_no = request.getParameter("p_no");	
+//데이터만 조회해서 json의로 뿌려줘야함 
+	
+	Connection conn = null;
+	ResultSet rs = null;
+	PreparedStatement psmt = null;
+	try
+	{			
+			String sql = "";
+			
+			sql = "select * from PT where p_no = "+p_no ;  // sql문  받아올것
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			rs.next();
+			
+			
+			JSONArray jsonArrList = new JSONArray();	
+		
+	}catch(Exception e)
+	{
+		out.println("ERROR:" + e.getMessage());
+	}
+	*/
+%>
+
+
+									
+									
+									

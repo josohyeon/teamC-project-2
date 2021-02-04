@@ -1,0 +1,46 @@
+package trainer;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import teamC.DBM;
+import teamC.VO;
+
+public class TrainerSearchDAO {
+
+	Connection        conn;
+	PreparedStatement pstmt;
+	ResultSet         rs;
+	
+	public List<VO> tSearchDAO(String t_nick)
+	{
+		String sql = "select t_nick from trainer where t_nick like '%" + t_nick + "%'";
+		
+		//System.out.println("sql"+sql);
+		DBM dbm = new DBM();
+		dbm.DBOpen();
+		conn = dbm.getConn();
+		VO vo = new VO();
+		List<VO> resultList = new ArrayList<VO>();
+		try 
+		{
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			//pstmt.setString(1, t_nick);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				vo.setT_nick(rs.getString("t_nick"));
+				resultList.add(vo);
+			}
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}finally 
+		{
+			dbm.DBClose();
+		}
+		return resultList;
+	}
+}

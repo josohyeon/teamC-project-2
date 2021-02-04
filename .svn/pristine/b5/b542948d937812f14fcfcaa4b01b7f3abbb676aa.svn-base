@@ -1,0 +1,33 @@
+package round;
+
+public class RoundVO 
+{
+	private int r_no;
+	private int r_ct;
+	private int r_date;
+	
+	
+	
+	public RoundVO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public int getR_no() {
+		return r_no;
+	}
+	public void setR_no(int r_no) {
+		this.r_no = r_no;
+	}
+	public int getR_ct() {
+		return r_ct;
+	}
+	public void setR_ct(int r_ct) {
+		this.r_ct = r_ct;
+	}
+	public int getR_date() {
+		return r_date;
+	}
+	public void setR_date(int r_date) {
+		this.r_date = r_date;
+	}
+}

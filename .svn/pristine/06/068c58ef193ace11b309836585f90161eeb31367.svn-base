@@ -1,0 +1,52 @@
+@charset "EUC-KR";
+
+body
+{
+	background-color:#3c3c3c;
+}
+#first
+{
+	position:absolute;
+	top:10px;
+	right:50px;
+}
+#first button
+{
+	font-weight:bold;
+	font-size:20px;
+}
+.find
+{
+	position:absolute;
+	top:5%;
+	width:100%;
+	height:950px;
+	background-color:white;
+	padding-top:200px;
+}
+#findtitle
+{
+	font-weight:bold;
+	font-size:40px;
+	margin:auto;
+	padding-bottom:50px;
+	text-align:center;
+	width:500px;
+	border-bottom:3px solid #3c3c3c;
+}
+ul
+{
+	list-style: none;
+	margin-left:100px;
+}
+li
+{
+	display: inline-block;
+	text-align: center;
+	padding: 100px 100px 0 200px;
+}
+.form-control
+{
+	display:inline;
+	width:50%
+}

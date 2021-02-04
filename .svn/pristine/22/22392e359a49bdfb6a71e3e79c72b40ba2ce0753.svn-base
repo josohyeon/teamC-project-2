@@ -1,0 +1,44 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link href="../style/Mmainpage.css" rel="stylesheet" type="text/css">
+<title>MEMBER MAIN</title>
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+</head>
+<style>
+</style>
+<body>
+	<div id="first">
+		<button type="button" class="btn btn-link" onclick="location.href='../startpage/Firstpage.jsp'">LOGOUT</button>
+	</div>
+	<div class="backimg">
+	</div>
+	<div class="content">
+		<span id="maincontent">나만의 PT 기록을 편리하게.</span>
+	</div>
+	<div class="container">
+		<ul>
+			<li>
+				<div class="item">
+					<img src="../images/planning.png" width="130px" style="padding-top: 15px">
+					<p><a href="../m-record/M-Record.jsp">나의 PT 기록</a></p>
+				</div>
+			</li>
+			<li>
+				<div class="item">
+					<img src="../images/trainer.png" width="130px" style="padding-top: 15px">
+					<p><a href="../m-mypage/M-Trainerview.jsp">트레이너 보기</a></p>
+				</div>
+			</li>
+			<li>
+				<div class="item">
+					<img src="../images/gym-bag.png" width="130px" style="padding-top: 15px">
+					<p><a href="../m-mypage/M-Mypage.jsp">마이페이지</a></p>			
+				</div>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>

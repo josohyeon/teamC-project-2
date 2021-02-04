@@ -1,0 +1,89 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<html>
+<head>
+<link href="../style/Logo&Login.css" rel="stylesheet" type="text/css">
+<title>MAIN</title>
+	<!--
+		중요한 순서대로 변경
+		커리어 확인이 아니라 만족도 보기로 변경해야함 (마이페이지에 있어도 될듯)
+		이미지, 페이지 연결 해야함 
+	-->
+</head>
+<style>
+ul
+{
+	list-style: none;
+}
+li
+{
+	display: inline-block;
+	text-align: center;
+	padding-top: 300px;
+}
+.container
+{
+
+	width :100%;
+	height : 1000px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	}
+.item
+{ 
+	width:200px;
+	height: 250px;
+	border:10px solid white;
+	margin :-100px 50px 20px 50px;
+}
+.item:hover 
+{
+	border :10px solid #B90000;
+}
+.item p
+{
+	color: red;
+	font-size: 25px;
+	font-weight: bold;
+}
+h3
+{
+	display:inline;
+}
+
+</style>
+<body>
+	<div class="container">
+		<div id="logo">
+			<img src="../images/logo.png" width="300px">
+		</div>
+		<div id="lojo">
+			<a>조소현</a><span>님 환영합니다.</span>
+			<p>
+			<span><a href="../startpage/Firstpage.jsp">로그아웃</a></span>
+		</div>
+		<ul>
+			<li>
+				<div class="item">
+					<img src="../images/mustle.png" width="130px" style="padding-top: 15px">
+					<p><a href="../m-record/M-Record.jsp">나의 PT 기록</a></p>
+				</div>
+			</li>
+			<li>
+				<div class="item">
+					<img src="../images/m_managament.png" width="130px" style="padding-top: 15px">
+					<p><a href="../m-mypage/M-Trainerview.jsp">트레이너 보기</a></p>
+				</div>
+			</li>
+			<li>
+				<div class="item">
+					<img src="../images/career.png" width="130px" style="padding-top: 15px">
+					<p><a href="../m-mypage/M-Mypage.jsp">마이페이지</a></p>			
+				</div>
+			</li>
+		</ul>
+	</div>
+	<img src="../images/chat3.png" style="width:60px; position:absolute; bottom:50px; right:50px" onclick="location.href='../chat/Chat.jsp'">
+</body>
+</html>

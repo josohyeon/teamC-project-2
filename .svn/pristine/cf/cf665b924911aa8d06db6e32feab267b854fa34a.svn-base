@@ -1,0 +1,27 @@
+@charset "EUC-KR";
+
+#divResult
+{
+display:none; 
+left:38%; 
+top:40%; 
+width:500px; 
+height:200px; 
+position:absolute; 
+border: 5px solid gold; 
+border-radius:10px; 
+background-color: white;
+}
+
+#divResult2
+{
+display:none; 
+left:38%; 
+top:40%; 
+width:500px; 
+height:200px; 
+position:absolute; 
+border: 5px solid gold; 
+border-radius:10px; 
+background-color: white;
+}

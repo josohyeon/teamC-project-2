@@ -1,0 +1,39 @@
+@charset "EUC-KR";
+
+ul#navi 
+{
+	width:200px;
+	text-indent:50px;
+	float:left;
+}
+ul#navi, ul#navi ul 
+{
+	margin:0;
+	padding:0;
+	list-style:none;
+	margin-top:200px;
+}
+li.group 
+{
+	margin-bottom:3px;
+}
+ul.sub li 
+{
+	margin-bottom:60px;
+	height:35px;
+	line-height:35px;
+	background:#f4f4f4;
+	cursor:pointer;    
+}
+ul.sub li a 
+{
+	display:block;
+	width:100%;
+ 	height:100%;
+	text-decoration:none;
+	color:#000;
+}
+ul.sub li:hover 
+{
+	background:#cf0;
+}

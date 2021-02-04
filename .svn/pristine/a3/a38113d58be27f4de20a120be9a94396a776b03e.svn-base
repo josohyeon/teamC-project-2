@@ -1,0 +1,64 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="javax.mail.Transport" %>
+<%@ page import="javax.mail.Message" %>
+<%@ page import="javax.mail.Address" %>
+<%@ page import="javax.mail.internet.InternetAddress" %>
+<%@ page import="javax.mail.internet.MimeMessage" %>
+<%@ page import="javax.mail.Session" %>
+<%@ page import="javax.mail.Authenticator" %>
+<%@ page import="java.util.Properties" %>
+<%@ page import="java.io.PrintWriter" %>
+<%@ page import="user.UserDAO" %>
+<%@ page import="util.SHA256" %>
+<%@ page import="util.Gmail" %>
+<%
+	UserDAO userDAO = new UserDAO();
+	String u_id = null;
+	if(session.getAttribute("u_id") != null)
+	{
+		u_id = (String)session.getAttribute("u_id");
+	}
+	
+	if(u_id == null)
+	{
+		PrintWriter script = response.getWriter();
+		script.println("<script>");
+		script.println("alert('로그인을 해주세요');");
+		script.println("location.href = '../startpage/Firstpage'");
+		script.println("</script>");
+		script.close();
+		return;
+	}
+	
+	boolean emailChecked = userDAO.getUserEmailChecked(u_id);
+	if(emailChecked == true)
+	{
+		PrintWriter script = response.getWriter();
+		script.print("<script>");
+		script.println("location.href='../startpage/Firstpage'");
+		script.println("</script>");
+		script.close();
+		return;
+		
+	}
+	
+	//사용자에게 보낼 메시지를 기입합니다.
+	String host = "http://localhost:8080/Team2/";
+	String from = "madao0128";
+	String to = userDAO.getUserEmail(u_id);
+	String subject = "pt기록 회원가입을 위한 이메일 확인 메일입니다";
+	String content = "다음 링크에 접속하여 이메일 확인을 진행하세요" +
+	"<a href='" + host + "emailCheckACtion.jsp?code=" + new SHA256().getSHA256(to) + "'>이메일 인증하기</a>";
+	
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+</body>
+</html>

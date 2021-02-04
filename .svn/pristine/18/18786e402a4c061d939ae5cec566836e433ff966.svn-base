@@ -1,0 +1,130 @@
+package user;
+
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import teamC.DBM;
+import teamC.VO;
+
+public class UserDAO 
+{
+	private Connection conn;
+	private ResultSet rs;
+	
+	public int login(String u_id,String u_pw)
+	{
+		String sql = "select u_pw from user where u_id = ?";
+		
+		System.out.println(sql);
+		DBM dbm = new DBM();
+		dbm.DBOpen();
+		try
+		{
+			//dbm.OpenQuery(sql)
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, u_id);
+			rs = pstmt.executeQuery();
+			
+			if(dbm.ResultNext())
+			{
+				if(dbm.getString("u_pw").equals(u_pw))
+					return 1;//로그인 성공
+				else
+					return 0;//비밀번호 틀림
+			}
+			return -1;//아이디 없음
+			
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+			
+		}
+		dbm.DBClose();
+		return -2;//데이터베이스 오류
+	}
+	
+	public int join(VO vo)
+	{
+		String sql = "";  
+		sql += "insert into user ";
+		sql += "(u_id,u_nick,u_pw,u_email,u_emailhash,u_emailchecked,u_phone, u_joindate, u_check, u_gender, u_state) ";
+		sql = sql + "values ";
+		sql = sql + "(?,?,?,?,?,?,?,?,?,?,?) ";
+	
+		System.out.println(sql);
+		DBM dbm = new DBM();
+		dbm.DBOpen();
+		
+		try
+		{
+			//dbm.Excute(sql)
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dbm.getString("u_id"));
+			pstmt.setString(2, dbm.getString("u_nick"));
+			pstmt.setString(3,	dbm.getString("u_pw"));
+			pstmt.setString(4, dbm.getString("u_email"));
+			pstmt.setString(5, dbm.getString("u_emailhash"));
+			pstmt.setString(6, dbm.getString("u_emailchecked"));
+			pstmt.setString(7, dbm.getString("u_phone"));
+			pstmt.setString(8, dbm.getString("u_joindate"));
+			pstmt.setString(9, dbm.getString("u_check"));
+			pstmt.setString(10, dbm.getString("u_gender"));
+			pstmt.setString(11, dbm.getString("u_state"));
+			return pstmt.executeUpdate();
+			
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		dbm.DBClose();
+		
+		return -1;//회원가입 실패
+		
+	}
+	
+	public String getUserEmail(String u_id)
+	{
+		String sql = "select u_email from user where u_id=? ";
+		
+		System.out.println(sql);
+		DBM dbm = new DBM();
+		dbm.DBOpen();
+		
+		try
+		{
+			//dbm.OpenQuery(sql)
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,u_id);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				return rs.getString(1);//이메일 주소 반환
+			}
+			
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		dbm.DBClose();
+		return null;//데이터베이스 오류
+	}
+	
+	public boolean setUserEmailChecked(String u_id)
+	{
+		String sql = "update user set u_emailchecked = true where u_id = ?";
+		
+		try
+		{
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, u_id);
+			pstmt.executeUpdate();
+			return true;//이메일 등록 설정 성공
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return false;//이메일 등록 설정 실패
+	}
+	
+}

@@ -1,0 +1,137 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<title>MAIN</title>
+</head>
+<style>
+body
+{	
+	color:black;
+}
+#lojo
+{
+	position:absolute;
+	top:10px;
+	right:50px;
+}
+#lojo button
+{
+	font-weight:bold;
+}
+.backimg
+{	
+	margin-top:50;
+	width:100%;
+	height:700px;
+	background-image: url(../images/background.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+.content
+{
+	position:absolute;
+	top:25%;
+	left:10%;
+	transform:traslate(-50%, -50%);
+	font-size:5rem;
+	color:white;
+	z-index:2;
+	text-align:center;
+}
+#maincontent
+{
+	font-weight:bold;
+	font-size:70px;
+}
+span
+{
+	font-weight:bold;
+	font-size:30px;
+}
+.container
+{
+
+	width :100%;
+	height : 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index:1;
+}
+ul
+{
+	list-style: none;
+}
+li
+{
+	display: inline-block;
+	text-align: center;
+	padding: 250px 250px 0 200px;
+}
+h3
+{
+	display:inline;
+}
+</style>
+<body>
+	<div id="lojo">
+		<button type="button" class="btn btn-link" name="joinbtn" onclick="location.href='../u-join/U-Join.jsp'">JOIN</button>
+		<button type="button" class="btn btn-link" name="findpw" onclick="location.href='../u-find/find.jsp'">ID/PW</button>
+	</div>
+	<div class="backimg">
+	</div>
+	<div class="content">
+		<span id="maincontent">PT 기록을 간편하게.</span>
+	</div>
+	<div class="container">
+		<ul>
+			<li>
+				<form name="member" method="get" action="">
+				<table style="margin:auto; height:200px; width:350px;">
+					<tr>
+						<td style="text-align:center; color:337AB7;"><span>PT회원</span></td>
+					</tr>
+					<tr>
+					</tr>
+					<tr>
+						<td style="font-weight:bold;">ID&nbsp;&nbsp;<input type="text" class="form-control" id="id" name="id"></td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold;">PW&nbsp;&nbsp;<input type="password" class="form-control" id="pwd" name="pwd"></td>
+					</tr>
+					<tr>
+					</tr>	
+					<tr>
+						<td rowspan="2" style="text-align:center">&nbsp;&nbsp;<button type="button" class="btn btn-dark" id="subbit" onclick="location.href='../m-mainpage/M-Mainpage.jsp'">LOGIN</button></td>
+					</tr>
+				</table>
+				</form>
+			</li>
+			<li>
+				<form name="trainer" method="get" action="">
+				<table style="margin:auto; height:200px; width:350px;">
+					<tr>
+						<td style="text-align:center; color:337AB7;"><span>트레이너</span></td>
+					</tr>
+					<tr>
+					</tr>
+					<tr>
+						<td style="font-weight:bold;">ID&nbsp;&nbsp;<input type="text" id="id" name="id" class="form-control"></td>
+					</tr>
+					<tr>		
+						<td style="font-weight:bold;">PW&nbsp;&nbsp;<input type="password" class="form-control" id="pwd" name="pwd"></td>
+					</tr>
+					<tr>
+					</tr>
+					<tr>
+						<td rowspan="2" style="text-align:center">&nbsp;&nbsp;<input type="button" class="btn btn-dark" id="subbit" value="LOGIN" onclick="location.href='../t-mainpage/T-Mainpage.jsp'"></td>
+					</tr>	
+				</table>
+				</form>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>

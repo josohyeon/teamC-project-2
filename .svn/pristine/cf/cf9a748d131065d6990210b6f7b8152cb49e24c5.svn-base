@@ -1,0 +1,77 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<header>
+		<div>
+			<h1>Admin</h1>
+			<span>로그인 | 로그아웃</span>
+			
+		</div>
+	</header>
+	
+	<nav>
+		<ul>
+			<li>일반 회원 관리</li>
+			<li>트레이너 회원 관리</li>
+			<li>전체 작성글 보기</li>
+			<li>현재 매칭된 회원 보기</li>
+			<li>관리자 설정</li>
+			<li>파일 업로드</li>
+		</ul>
+	</nav>
+	
+	<section>
+		<table border="1">
+			<tr>
+				<td colspan="6">일반 회원 관리</td>
+			</tr>
+			<tr>
+				<td colspan="6">총 100건의 게시물존재</td>
+			</tr>
+			<tr>
+				<td><input type="radio">전체선택</td>
+				<td>번호</td>
+				<td>제목</td>
+				<td>글쓴이</td>
+				<td>조회수</td>
+				<td><button>삭제</button></td>				
+			</tr>
+			
+			<tr>
+				<td><input type="radio"></td>
+				<td>100</td>
+				<td>댓글테스트</td>
+				<td>박철현</td>
+				<td>55</td>
+			</tr>
+			<tr>
+				<td><input type="radio"></td>
+				<td>100</td>
+				<td>댓글테스트</td>
+				<td>박철현</td>
+				<td>55</td>
+			</tr>
+			<tr>
+				<td><input type="radio"></td>
+				<td>100</td>
+				<td>댓글테스트</td>
+				<td>박철현</td>
+				<td>55</td>
+			</tr>
+			<tr>
+				<td><input type="radio"></td>
+				<td>100</td>
+				<td>댓글테스트</td>
+				<td>박철현</td>
+				<td>55</td>
+			</tr>
+		</table>
+	</section>
+</body>
+</html>

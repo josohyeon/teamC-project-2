@@ -1,0 +1,49 @@
+package trainer;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import teamC.DBM;
+import teamC.VO;
+
+public class TrainerSearchDAO {
+
+	Connection        conn;
+	PreparedStatement pstmt;
+	ResultSet         rs;
+	
+	public List<VO> tSearchDAO(String t_nick)
+	{
+		String sql = "select t.t_nick,t.t_addr1,t.t_addr2,(select avg(p.p_score) from pt p where p.t_no = t.t_no and p.p_state = 'c') as t_score from trainer t where t.t_nick like '%" + t_nick + "%'";
+		
+		//System.out.println("sql"+sql);
+		DBM dbm = new DBM();
+		dbm.DBOpen();
+		conn = dbm.getConn();
+		VO vo = new VO();
+		List<VO> resultList = new ArrayList<VO>();
+		try 
+		{
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			//pstmt.setString(1, t_nick);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				vo.setT_nick(rs.getString("t_nick"));
+				vo.setT_addr1(rs.getString("t_addr1"));
+				vo.setT_addr2(rs.getString("t_addr2"));
+				vo.setT_score(rs.getDouble("t_score"));
+				resultList.add(vo);
+			}
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}finally 
+		{
+			dbm.DBClose();
+		}
+		return resultList;
+	}
+}

@@ -1,0 +1,76 @@
+package trainer;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import teamC.DBM;
+import teamC.VO;
+
+public class TrainerInfoDAO {
+
+	Connection        conn;
+	PreparedStatement pstmt;
+	ResultSet         rs;
+	
+	public VO tInfoDAO(String t_id) 
+	{
+		String sql = "select t_no,t_id,t_nick,t_pw,t_phone,t_email from trainer where t_id = ?";
+		
+		DBM dbm = new DBM();
+		dbm.DBOpen();
+		conn    = dbm.getConn();
+		VO vo   = new VO();
+		try 
+		{
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, t_id);
+			rs = pstmt.executeQuery();
+			rs.next();
+			
+			vo.setT_id(rs.getString("t_id"));
+			vo.setT_no(rs.getInt("t_no"));
+			vo.setT_nick(rs.getString("t_nick"));
+			vo.setT_major(rs.getString("t_pw"));
+			vo.setT_addr1(rs.getString("t_phone"));
+			vo.setT_addr2(rs.getString("t_email"));
+			
+			rs.close();
+		}catch(Exception e) 
+		{
+			e.printStackTrace();
+		}finally 
+		{
+			dbm.DBClose();
+		}
+		return vo;
+	}
+	
+	public int tInfoUpdateDAO(VO vo) 
+	{
+		String sql  = "update trainer set ";
+			   sql += "t_pw = '?', ";
+			   sql += "t_phone = '?', ";
+			   sql += "t_email = '?'";
+			   
+		DBM dbm = new DBM();
+		dbm.DBOpen();
+		conn = dbm.getConn();
+		try 
+		{	
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getT_pw());
+			pstmt.setString(2, vo.getT_phone());
+			pstmt.setString(3, vo.getT_email());
+			return pstmt.executeUpdate();
+			
+		}catch(Exception e) 
+		{
+			e.printStackTrace();
+		}finally 
+		{
+			dbm.DBOpen();
+		}
+		return 1;
+	}
+}

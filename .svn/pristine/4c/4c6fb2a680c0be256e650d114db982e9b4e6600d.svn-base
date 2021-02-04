@@ -1,0 +1,88 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<title>Join</title>
+<script src="../js/jquery-3.5.1.min.js"></script>
+<script>
+
+</script>
+<style>
+#join
+{
+	margin:auto;
+}
+</style>
+</head>
+<body>
+	<div>
+		<div id="join">
+			<span>회원가입</span>
+		</div>
+		<table>
+			<tr>
+				<th>아이디</th>
+				<td>
+					<input name="ID" id="ID" type="text" class="d1" size="10" maxlength="10" value="" />
+					<input type="button" value="중복검사">
+					<span style="font-size:11px">(6-10자 영문/숫자)</span>
+				</td>
+	        </tr>
+			<tr>
+				<th>닉네임</th>
+				<td>
+					<input name="ID" id="ID" type="text" class="d1" size="10" maxlength="10" value="" />
+					<input type="button" value="중복검사">
+					<span style="font-size:11px">(6-10자 영문/숫자)</span>
+				</td>
+			</tr>
+			<tr>
+				<th>비밀번호</th>
+				<td>
+					<input name="password" id="password" type="password" class="d1" size="20" maxlength="15" />
+					<span style="font-size:11px">(6-10자 영문/숫자/영문,숫자 조합만 가능)</span>
+				</td>
+			</tr>
+			<tr>
+				<th>비밀번호확인</th>
+				<td>
+					<input name="pwdC" id="pwdC" type="password" class="dt" size="20" maxlength="15" />
+				</td>
+			</tr>
+			<tr>
+				<th>성별</th>
+				<td>
+					<input type="radio" name="gender" value="true">남
+					<input type="radio" name="gender" value="false">여
+				</td>
+			</tr>        
+			<tr>
+				<th>휴대폰 번호</th>
+				<td>
+					<input type="text" class="num" width="200px" maxlength="20" placeholder="'-'없이 입력해주세요">
+				</td>
+			</tr>
+			<tr>
+				<th>이메일</th>
+				<td>
+					<input type="email" class="emi">@
+					<select>
+						<option>naver.com</option>
+						<option>daum.co.kr</option>
+						<option>hanmail.co.kr</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th>회원구분</th>
+				<td>
+					<input type="radio" name="u_check" value="1">트레이너
+					<input type="radio" name="u_check" value="2">일반회원
+				</td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link href="../style/U-joinpage.css" rel="stylesheet" type="text/css">
+<title>JOIN</title>
+<script src="../js/jquery-3.5.1.min.js"></script>
+<script>
+
+</script>
+</head>
+<body>
+	<div id="first">
+		<button type="button" class="btn btn-link" onclick="location.href='../startpage/Firstpage.jsp'">BACK</button>
+	</div>
+	<div class="join">
+		<div id="jointitle">
+			<span>회원가입</span>
+		</div>
+		<form id="" name="" method="" action="">
+		<table style="width:900px; height:500px; margin-left:35%; margin-top:50px">
+			<tr>
+				<th>아이디</th>
+				<td>
+					<input name="id" id="id" type="text" size="10" maxlength="10" class="form-control" placeholder="(6-10자 영문/숫자)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="button" class="btn btn-dark" value="중복검사">
+				</td>
+	        </tr>
+			<tr>
+				<th>닉네임</th>
+				<td>
+					<input name="nick" id="nick" type="text" size="10" maxlength="10" class="form-control" placeholder="(6-10자 영문/숫자)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="button" class="btn btn-dark" value="중복검사">
+				</td>
+			</tr>
+			<tr>
+				<th>비밀번호</th>
+				<td>
+					<input name="password" id="password" type="password" size="20" maxlength="15" class="form-control" placeholder="(6-10자 영문/숫자/영문,숫자 조합만 가능)">
+				</td>
+			</tr>
+			<tr>
+				<th>비밀번호확인</th>
+				<td>
+					<input name="pwdC" id="pwdC" type="password" size="20" maxlength="15" class="form-control">
+				</td>
+			</tr>
+			<tr>
+				<th>성별</th>
+				<td>
+					<input type="radio" name="gender" value="true">&nbsp;&nbsp;남&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="radio" name="gender" value="false">&nbsp;&nbsp;여
+				</td>
+			</tr>        
+			<tr>
+				<th>휴대폰 번호</th>
+				<td>
+					<input type="text" width="200px" maxlength="20" placeholder="'-'없이 입력해주세요" class="form-control">
+				</td>
+			</tr>
+			<tr>
+				<th>이메일</th>
+				<td colspan="2">
+					<input type="email" class="form-control" id="e1">@
+					<select class="form-control" id="e2">
+						<option>naver.com</option>
+						<option>daum.co.kr</option>
+						<option>hanmail.co.kr</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th>회원구분</th>
+				<td>
+					<input type="radio" name="u_check" value="1">&nbsp;&nbsp;트레이너&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="radio" name="u_check" value="2">&nbsp;&nbsp;일반회원
+				</td>
+			</tr>
+		</table>
+		<div align="center" style="margin:50px 0px 10px 0px;">
+			<input type="button" value="회원가입" class="btn btn-dark" onclick="location.href='../startpage/Firstpage.jsp';">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button type="button" class="btn btn-dark" onclick="location.href='../startpage/Firstpage.jsp';" >취소</button>
+		</div>
+		</form>
+	</div>
+</body>
+</html>

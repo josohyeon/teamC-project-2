@@ -1,0 +1,155 @@
+<%@ page language="java" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<link href="../style/Logo&Login.css" rel="stylesheet" type="text/css">
+<link href="../style/Navi.css" rel="stylesheet" type="text/css">
+<title>회원 관리 기록</title>
+<script src="../js/jquery-3.5.1.min.js"></script>
+<script>
+	function list()
+	{
+		$(".list1").toggle();
+	}
+	
+	function detailview()
+	{
+		$(".detail").toggle();
+	}
+</script>
+<style>
+header
+{			
+	height:15vh;	
+}
+body
+{
+	height:100vh;
+	margin:auto;
+}
+section
+{
+	width:80%;
+	height:80%;
+	margin:auto;
+}
+article
+{
+	width:100%;
+	height:100%;
+	margin:auto;
+}
+.list1
+{
+	display:none;
+}
+.detail
+{
+	display:none;
+}
+</style>
+</head>
+<body>
+	<header style="border-bottom:1px solid black">
+		<img src="../images/logo.png" id="logo">
+		<div id="lojo">
+			<a>조소현</a><span>님 환영합니다.</span>
+			<p>
+			<span><a href="../startpage/Firstpage.jsp">로그아웃</a></span>
+		</div>
+	</header>
+	<nav>
+		<ul id="navi">
+			<li class="group">
+				<ul class="sub">
+					<li><a href="../m-record/M-Record.jsp">나의 PT 기록</a></li>
+					<li><a href="../m-mypage/M-Trainerview.jsp">트레이너 보기</a></li>
+					<li><a href="../m-mypage/M-Mypage.jsp">마이페이지</a></li>
+				</ul>
+			</li>     
+		</ul>
+	</nav>
+	<div style="width:70%; margin:auto">
+		<div style="margin-top:10vh; float:left; width:50vh;">
+			<table style="margin:auto;">
+				<thead style="text-align:center;">
+					<h2>나의 PT 기록</h2>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<div style="border:1px solid black; width:500px; height:150px; padding:10px" >
+								<img src="../images/Jo.jpg" style="width:150px; height:145px; border:1px solid black; margin:10px 10px 0px 10px; float:left;">
+								닉네임 : 조소현<br>
+								PT차수 : 3회차 /10회차<br>
+								<button onclick="list()">PT회차</button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="list1">
+							<input type="button" id="btn3" value="3회차 운동기록" style="width:500px; height:30px; padding:10px;" onclick="javascript:detailview()">
+							<input type="button" id="btn2" value="2회차 운동기록" style="width:500px; height:30px; padding:10px;">
+							<input type="button" id="btn1" value="1회차 운동기록" style="width:500px; height:30px; padding:10px;">
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+			<div style="float:right; right:30%;" class="detail">
+				<div style="margin-top:20%; text-align:center; width:30vh">
+				<h3 style="text-align:center">3회차 2020.12.16</h3>
+				<table border="1" style="width:50vh; height:300px; text-align:center; margin:auto;">
+					<tr>
+						<td rowspan="4">덤벨프레스</td>
+						<td>세트</td>
+						<td>횟수</td>
+						<td>무게</td>
+					</tr>
+					<tr>
+						<td>10</td>
+						<td>10</td>
+						<td>40kg</td>
+					</tr>
+					<tr>
+						<td>소요시간</td>
+						<td>자극부위</td>
+						<td>세트간 휴식</td>
+					</tr>
+					<tr>
+						<td>30분</td>
+						<td>가슴</td>
+						<td>1분</td>
+					</tr>
+				</table>
+			</div>
+			<div style="margin-top:10vh;">
+				<table border="1" style="width:50vh; height:300px; text-align:center; margin:auto;">
+					<tr>
+						<td rowspan="4">벤치프레스</td>
+						<td>세트</td>
+						<td>횟수</td>
+						<td>무게</td>
+					</tr>
+					<tr>
+						<td>10</td>
+						<td>10</td>
+						<td>100kg</td>
+					</tr>
+					<tr>
+						<td>소요시간</td>
+						<td>자극부위</td>
+						<td>세트간 휴식</td>
+					</tr>
+					<tr>
+						<td>30분</td>
+						<td>상체</td>
+						<td>1분</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<img src="../images/chat3.png" style="width:60px; position:absolute; bottom:50px; right:50px" onclick="location.href='../chat/M-Chat.jsp'">
+</body>
+</html>

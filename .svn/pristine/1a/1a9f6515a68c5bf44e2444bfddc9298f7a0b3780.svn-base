@@ -1,0 +1,119 @@
+package trainer;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import teamC.DBM;
+import teamC.VO;
+
+public class TrainerSearchDAO {
+
+	Connection        conn;
+	PreparedStatement pstmt;
+	ResultSet         rs;
+	
+	public List<VO> tSearchDAO(String t_nick)
+	{
+		String sql = "select t.t_no,t.t_nick,t.t_addr1,t.t_addr2,(select avg(p.p_score) from pt p where p.t_no = t.t_no and p.p_state = 'c') as t_score from trainer t where t.t_nick like '%" + t_nick + "%'";
+		
+		//System.out.println("sql"+sql);
+		DBM dbm = new DBM();
+		dbm.DBOpen();
+		conn = dbm.getConn();
+		List<VO> resultList = new ArrayList<VO>();
+		PreparedStatement pstmt ;
+		try 
+		{
+			pstmt = conn.prepareStatement(sql);
+			//pstmt.setString(1, t_nick);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				VO vo = new VO(); // vo마다 데이터를 담기위해 while문안에 vo 생성.
+				vo.setT_no(rs.getInt("t_no"));
+				vo.setT_nick(rs.getString("t_nick"));
+				vo.setT_addr1(rs.getString("t_addr1"));
+				vo.setT_addr2(rs.getString("t_addr2"));
+				vo.setT_score(rs.getDouble("t_score"));
+				resultList.add(vo);
+			}
+			rs.close();
+			pstmt.close();
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}finally 
+		{
+			dbm.DBClose();
+		}
+		return resultList;
+	}
+	
+	public int tApplyDAO(String u_id, String t_no) 
+	{
+		String sql = "select u_no from user where u_id = ?";
+		DBM dbm = new DBM();
+		dbm.DBOpen();
+		conn = dbm.getConn();
+		Connection        conn2;
+		DBM dbm2 = new DBM();
+		dbm2.DBOpen();
+		conn2 = dbm2.getConn();
+		try 
+		{
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, u_id);
+			rs = pstmt.executeQuery();
+			rs.next();
+			int u_no = rs.getInt("u_no");
+			rs.close();
+			pstmt.close();
+			
+			sql  = "insert into pt ";
+			sql += "(t_no,u_no,p_state,p_send,p_try,p_cnt,p_score) ";
+			sql += "values ";
+			sql += "("+Integer.parseInt(t_no)+","+u_no+",'a',now(),0,0,0)";
+			PreparedStatement pstmt2 = conn2.prepareStatement(sql);
+			int result =  pstmt2.executeUpdate(sql);
+			pstmt2.close();
+			
+			return result;
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+			return -1;
+		}finally 
+		{
+			dbm.DBClose();
+			dbm2.DBClose();
+		}
+	}
+	
+	
+	public void tCancelDAO(String u_id, String t_no) 
+	{
+		String sql = "delete t_no,u_no,p_state from pt where u_id = ?";
+		DBM dbm = new DBM();
+		dbm.DBOpen();
+		conn = dbm.getConn();
+		
+		try 
+		{
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, u_id);
+			rs = pstmt.executeQuery();
+			rs.next();
+			pstmt.executeUpdate(sql);
+			pstmt.close();
+			rs.close();
+		}catch(Exception e) 
+		{
+			e.printStackTrace();
+		}finally 
+		{
+			dbm.DBClose();
+		}
+	}
+}

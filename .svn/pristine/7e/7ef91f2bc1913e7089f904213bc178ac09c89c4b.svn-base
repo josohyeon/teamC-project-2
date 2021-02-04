@@ -1,0 +1,75 @@
+package pt;
+
+public class PtVO 
+{
+	private int		p_no;
+	private int 	p_try;
+	private String  p_state;
+	private String  p_send;
+	private String  p_ok;
+	private String  p_end;
+	private String 	p_cnt;
+	private int  p_score;
+	private String  p_comment;
+	
+	
+
+	public PtVO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public int getP_no() {
+		return p_no;
+	}
+	public void setP_no(int p_no) {
+		this.p_no = p_no;
+	}
+	public int getP_try() {
+		return p_try;
+	}
+	public void setP_try(int p_try) {
+		this.p_try = p_try;
+	}
+	public String getP_state() {
+		return p_state;
+	}
+	public void setP_state(String p_state) {
+		this.p_state = p_state;
+	}
+	public String getP_send() {
+		return p_send;
+	}
+	public void setP_send(String p_send) {
+		this.p_send = p_send;
+	}
+	public String getP_ok() {
+		return p_ok;
+	}
+	public void setP_ok(String p_ok) {
+		this.p_ok = p_ok;
+	}
+	public String getP_end() {
+		return p_end;
+	}
+	public void setP_end(String p_end) {
+		this.p_end = p_end;
+	}
+	public String getP_cnt() {
+		return p_cnt;
+	}
+	public void setP_cnt(String p_cnt) {
+		this.p_cnt = p_cnt;
+	}
+	public double getP_score() {
+		return p_score;
+	}
+	public void setP_score(int p_score) {
+		this.p_score = p_score;
+	}
+	public String getP_comment() {
+		return p_comment;
+	}
+	public void setP_comment(String p_comment) {
+		this.p_comment = p_comment;
+	}	
+}

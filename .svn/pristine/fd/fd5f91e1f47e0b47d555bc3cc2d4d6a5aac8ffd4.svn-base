@@ -1,0 +1,15 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="teamC.DBM" %> 
+
+<% 
+String p_comment= request.getParameter("mComment");
+String u_no= request.getParameter("u_no");
+int p_no = Integer.parseInt(request.getParameter("p_no"));
+DBM dbm = new DBM();
+dbm.DBOpen();
+String sql = "" ;
+sql = "update pt set p_comment = '" +p_comment+ " 'where u_no =" +u_no ;
+dbm.Excute(sql);
+dbm.DBClose();
+%>

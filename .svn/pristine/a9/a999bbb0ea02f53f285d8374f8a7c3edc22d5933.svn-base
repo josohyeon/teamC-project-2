@@ -1,0 +1,70 @@
+@charset "EUC-KR";
+body
+{
+	background-color: #FFBE0A;
+}
+#first
+{
+	position:absolute;
+	top:10px;
+	right:50px;
+}
+#first button
+{
+	font-weight:bold;
+	font-size:20px;
+	color:black;
+}
+.container
+{
+
+	width :100%;
+	height : 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index:1;
+}
+ul
+{
+	list-style: none;
+}
+li
+{
+	display: inline-block;
+	text-align: center;
+	padding: 60px 250px 0 200px;
+}
+span
+{
+	color:black;
+}
+a
+{	
+	font-weight:bold;
+	font-size:20px;
+	color:black;
+	
+}
+a:hover
+{
+	color:white;
+}
+.info
+{
+	position:absolute;
+	top:5%;
+	width:100%;
+	height:950px;
+	background-color: white;
+	padding-top:100px;
+}
+td
+{
+	text-align:center;
+}
+th, td
+{
+	font-size:17px;
+	
+}

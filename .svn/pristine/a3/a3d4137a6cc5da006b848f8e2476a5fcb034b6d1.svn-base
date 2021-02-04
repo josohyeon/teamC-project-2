@@ -1,0 +1,82 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="util.Utility" %>
+<%@ page import="teamC.DBM" %>
+<%@ page import="teamC.VO" %>
+<%@ page import="trainer.TrainerDAO"%>
+<%@ page import="java.io.PrintWriter" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%
+	//비정상 요청에 대한 처리 -> 페이지 이동
+	if(request.getMethod().equals("GET"))
+	{
+		response.sendRedirect("U-Join.jsp");
+		return;
+	}
+	
+	//입력데이터에 대한 인코딩 방식 변경 -> 한글 입력 데이터 처리
+	request.setCharacterEncoding("UTF-8");
+	
+	//입력데이터를 반환받아 저장
+	String t_id = null;
+	String t_nick = null;
+	String t_pw = null;
+	String t_email = null;
+	String t_phone = null;
+	String t_major = null;
+	String t_addr1 = null;
+	String t_addr2 = null;
+
+	
+	
+	if(request.getParameter("u_id")!=null)
+	{ 	t_id = (String)request.getParameter("u_id");}
+	if(request.getParameter("u_nick")!=null)
+	{	t_nick = request.getParameter("u_nick");}
+	if(request.getParameter("u_pw")!=null)
+	{ 	t_pw = Utility.encoding(request.getParameter("u_pw"));}
+	if(request.getParameter("u_email")!=null)
+	{ 	t_email = (String)request.getParameter("u_email");}
+	if(request.getParameter("u_phone")!=null)
+	{ 	t_phone = (String)request.getParameter("u_phone");}
+	if(request.getParameter("t_major")!=null)
+	{ 	t_major = (String)request.getParameter("t_major");}
+	if(request.getParameter("t_addr1")!=null)
+	{ 	t_addr1 = (String)request.getParameter("t_addr1");}
+	if(request.getParameter("t_addr2")!=null)
+	{ 	t_addr2 = (String)request.getParameter("t_addr2");}
+	
+	//t_joindate 
+	SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	Date now = new Date();
+	String t_joindate = format1.format(now);
+	
+	
+		TrainerDAO trainerDAO = new TrainerDAO();
+		int result = trainerDAO.join(new VO(t_id,t_nick,Utility.encoding(t_pw),
+				t_email,t_phone,t_joindate,t_major,t_addr1,t_addr2,'Y'));
+		
+		if(result == -1)
+		{ 	
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('이미 존재하는 아이디입니다.');");
+			script.println("history.back();");
+			script.println("</script>");
+			script.close();
+		}else
+		{
+			session.setAttribute("u_id",t_id);
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('가입에 성공하셨습니다.');");
+			script.println("location.href = '../startpage/Firstpage.jsp';");
+			script.println("</script>");
+			script.close();
+		}
+		
+		
+	
+	
+%>

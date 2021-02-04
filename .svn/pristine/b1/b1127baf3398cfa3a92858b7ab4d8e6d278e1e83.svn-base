@@ -1,0 +1,95 @@
+-- 사용자 테이블
+create table User
+(
+	u_no       		int auto_increment				comment '사용자번호', -- 사용자번호
+	u_id       		varchar(20) not null unique		comment '아이디',    -- 아이디
+	u_nick     		varchar(20) not null unique		comment '닉네임',    -- 닉네임
+	u_pw       		varchar(200) not null unique		comment '비밀번호',   -- 비밀번호
+	u_email    		varchar(100)not null unique		comment '이메일',    -- 이메일
+	u_emailhash		varchar(64)						comment '이메일해시',  -- 이메일해시
+	u_emailchecked	boolean							comment '이메일확인',  -- 이메일확인
+	u_phone    		varchar(20) not null unique		comment '휴대폰번호',  -- 휴대폰번호
+	u_joindate 		date        not null			comment '가입일',    -- 가입일
+	u_check    		int         not null			comment '회원구분',   -- 회원구분
+	u_gender   		boolean							comment '성별',     -- 성별
+	u_state    		varchar(2)						comment '관리여부',   -- 관리여부 
+	primary key (u_no)
+);
+
+-- 트레이너 테이블
+create table Trainer
+(
+	t_no    int	auto_increment		comment '트레이너번호', -- 트레이너번호
+	u_no	int,
+	t_major varchar(50)  not null	comment '전문분야',    -- 전문분야
+	t_addr1 varchar(50)  not null	comment '우편번호',    -- 우편번호
+	t_addr2 varchar(255) not null	comment '주소',       -- 주소
+	t_addr3 varchar(255) not null	comment '상세주소',    -- 상세주소
+	t_photo varchar(200) not null	comment '첨부사진',    -- 첨부사진
+	t_score double					comment '만족도평균',   -- 만족도평균
+	t_etc   text		 not null	comment '트레이너 기타사항', -- 트레이너 기타사항
+	t_cost1 int						comment '가격1',      -- 가격1
+	t_cost2 int						comment '가격2',      -- 가격2
+	t_cost3 int						comment '가격3',      -- 가격3
+	primary key (t_no),
+	foreign key (u_no) references User (u_no)
+);
+
+-- 회원 테이블
+create table Members
+(
+	m_no int auto_increment	comment '회원번호', -- 회원번호
+	u_no int ,
+	primary key(m_no),
+	foreign key (u_no) references User (u_no)
+);
+
+-- 회원관리 테이블
+create table PT
+(
+	p_no      int  auto_increment	comment '회원관리번호', -- 회원관리번호
+	t_no      int,
+	m_no	  int,
+	p_state   char	not null		comment '회원관리상태', -- 회원관리상태
+	p_send    date					comment '수락신청일자', -- 수락신청일자
+	p_ok   	  date					comment '수락승인일자', -- 수락승인일자
+	p_end	  date					comment 'PT완료일자',  -- PT완료일자
+	p_cnt	  int   not null		comment 'PT총회차',    -- PT총회차
+	p_score   double				comment '만족도',     -- 만족도
+	p_comment text					comment '회원세부사항', -- 회원세부사항
+	primary key (p_no),
+	foreign key (t_no) references Trainer (t_no),
+	foreign key (m_no) references Members (m_no)
+);
+
+-- PT회차 테이블
+create table Count
+(
+	c_no   int  auto_increment	comment 'PT회차번호', -- PT회차번호
+	p_no   int ,
+	t_no   int ,
+	c_date date not null		comment 'PT날짜',    -- PT날짜
+	primary key (c_no),
+	foreign key (p_no) references PT (p_no),
+	foreign key (t_no) references Trainer (t_no)
+);
+
+-- 운동기록 테이블
+create table Exercise
+(
+	e_no   int auto_increment		comment '운동관리번호', -- 운동관리번호
+	p_no   int ,
+	c_no   int ,
+	t_no   int ,
+	e_name varchar(100)	not null	comment '운동명',	 -- 운동명
+	e_set  int						comment '세트',    -- 세트
+	e_cnt  int						comment '횟수',    -- 횟수
+	e_kg   int						comment '무게',    -- 무게
+	e_time int						comment '소요시간',  -- 소요시간
+	e_part varchar(50)				comment '자극부위',  -- 자극부위
+	e_rest int						comment '세트간휴식', -- 세트간휴식
+	primary key (e_no),
+	foreign key (p_no) references PT (p_no),
+	foreign key (c_no) references Count (c_no),
+	foreign key (t_no) references Trainer (t_no)
+);

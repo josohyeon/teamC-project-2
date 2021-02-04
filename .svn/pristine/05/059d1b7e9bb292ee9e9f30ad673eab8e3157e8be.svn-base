@@ -1,0 +1,91 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*" %>
+<%@ include file="../daejang/DBOpen.jsp" %> 
+<%@ page import="teamC.VO" %>
+<%@ page import="pt.PtDAO" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+</head>
+<script>
+
+</script>
+<body>
+<%
+	String u_id = null;
+	if(session.getAttribute("u_id") != null) {
+		u_id = (String) session.getAttribute("u_id");
+	}
+	/* if(u_id == null) {
+		PrintWriter script = response.getWriter();
+		script.println("<script>");
+		script.println("alert('잘못된 접근입니다!!');");
+		script.println("location.href = '../startpage/Firstpage.jsp'");
+		script.println("</script>");
+		script.close();	
+	} */
+	
+%>
+	<table style="margin:auto; width:80%; margin-top:30px; text-align:center;">
+		<thead>
+			<tr >
+				<th>닉네임</th>
+				<th>신청회차</th>
+				<th>신청일</th>
+				<th>신청관리</th>				
+			</tr>
+		</thead>
+		<tbody>
+			<%
+				PtDAO ptDAO = new PtDAO();
+
+				int t_no  = ptDAO.findt_no(u_id);
+			
+				try{
+					ResultSet rs;
+					sql = "select u_no,p_cnt,p_send,(select u_nick from user where user.u_no = pt.u_no) as p_nick from pt where t_no = '" + t_no + "' and p_state = 'a' ";
+			
+					mStmt= conn.prepareStatement(sql,ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+					rs = mStmt.executeQuery();		
+					
+					while(rs.next())
+					{
+						u_no 			= rs.getString("u_no");		
+						String p_nick  	= rs.getString("p_nick");
+						int    p_cnt  	= rs.getInt("p_cnt");
+						String p_send 	= rs.getString("p_send");
+						
+						%>
+						<tr bgcolor="white">
+							<td><%= p_nick %></td>
+							<td><%= p_cnt %>회차</td>
+							<td><%= p_send %></td>
+							<td>
+								<a href="p_accept.jsp?u_no=<%= u_no %>">수락</a>
+								<a href="p_cancel.jsp?u_no=<%= u_no %>">취소</a>
+							</td>
+						</tr>
+						<%
+					}
+					
+					//검색된 결과를 닫는다.
+					rs.close();
+			
+					//stmt 를 닫는다.
+					mStmt.close();		
+					
+				}catch(Exception e)
+				{
+					out.println("ERROR:" + e.getMessage());
+				}
+			%>
+		</tbody>
+	</table>
+</body>
+</html>
+<% conn.close();%>

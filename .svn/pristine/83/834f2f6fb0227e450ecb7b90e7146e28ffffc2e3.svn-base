@@ -1,0 +1,110 @@
+package trainer;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import teamC.DBM;
+import teamC.VO;
+
+public class TrainerProfilDAO {
+
+	Connection        conn;
+	PreparedStatement pstmt;
+	ResultSet         rs;
+	
+	public VO tProfilDAO(String t_id) 
+	{
+		String sql = "select t_ick,t_major,t_addr1,t_addr2,t_photo,t_score,t_etc,t_cost1,t_cost2,t_cost3 from trainer where t_id = ?";
+		
+		DBM dbm = new DBM();
+		dbm.DBOpen();
+		conn    = dbm.getConn();
+		VO vo   = new VO();
+		try 
+		{
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, t_id);
+			rs = pstmt.executeQuery();
+			rs.next();
+			
+			vo.setT_id(rs.getString("t_id"));
+		}catch(Exception e) 
+		{
+			e.printStackTrace();
+		}finally 
+		{
+			dbm.DBClose();
+		}
+		return vo;
+	}
+	
+	public int tProfilInsertDAO(VO vo) 
+	{
+		String sql  = "insert into trainer ";
+			   sql += "(t_nick,t_major,t_addr1,t_addr2,t_photo,t_score,t_etc,t_cost1,t_cost2,t_cost3) ";
+			   sql += "values ";
+			   sql += "(?,?,?,?,?,?,?,?,?,?)";
+		
+		DBM dbm = new DBM();
+		dbm.DBOpen();
+		conn = dbm.getConn();
+		try 
+		{	
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getT_nick());
+			pstmt.setString(2, vo.getT_major());
+			pstmt.setString(3, vo.getT_addr1());
+			pstmt.setString(4, vo.getT_addr2());
+			pstmt.setString(5, vo.getT_photo());
+			pstmt.setString(6, vo.getT_score());
+			pstmt.setString(7, vo.getT_etc());
+			pstmt.setString(8, vo.getT_cost1());
+			pstmt.setString(9, vo.getT_cost2());
+			pstmt.setString(10, vo.getT_cost3());
+			return pstmt.executeUpdate();
+			
+		}catch(Exception e) 
+		{
+			e.printStackTrace();
+		}finally 
+		{
+			dbm.DBOpen();
+		}
+		return 1;
+	}
+	
+	public int tProfilUpdateDAO(VO vo) 
+	{
+		String sql  = "update trainer set ";
+			   sql += "t_nick ='?', t_major = '?', ";
+			   sql += "t_addr1 ='?' , t_addr2 = '?', t_, t_score, t_etc, t_cost1, t_cost2, t_cost3) ";
+	
+		DBM dbm = new DBM();
+		dbm.DBOpen();
+		conn = dbm.getConn();
+		try 
+		{	
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getT_nick());
+			pstmt.setString(2, vo.getT_major());
+			pstmt.setString(3, vo.getT_addr1());
+			pstmt.setString(4, vo.getT_addr2());
+			pstmt.setString(5, vo.getT_photo());
+			pstmt.setString(6, vo.getT_score());
+			pstmt.setString(7, vo.getT_etc());
+			pstmt.setString(8, vo.getT_cost1());
+			pstmt.setString(9, vo.getT_cost2());
+			pstmt.setString(10, vo.getT_cost3());
+			return pstmt.executeUpdate();
+			
+		}catch(Exception e) 
+		{
+			e.printStackTrace();
+		}finally 
+		{
+			dbm.DBOpen();
+		}
+		return 1;
+	}
+}

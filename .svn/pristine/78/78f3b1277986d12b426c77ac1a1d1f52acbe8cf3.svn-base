@@ -1,0 +1,51 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import = "java.sql.DriverManager" %>
+<%@ page import = "java.sql.Connection" %>
+<%@ page import = "java.sql.PreparedStatement" %>
+<%@ page import = "java.sql.ResultSet" %>
+<%@ page import = "java.sql.SQLException" %>
+<%@ page import="teamC.DBM" %>  
+<%@ page import="teamC.VO" %>
+<%
+	String t_no = request.getParameter("t_no");
+	String u_no = request.getParameter("u_no");
+	String listMax = request.getParameter("listMax");
+	DBM dbmA = new DBM();
+	DBM dbmB = new DBM();
+	
+
+	 try 
+	 {
+		 dbmA.DBOpen();
+
+		
+		 String sql = "" ;
+		 sql = "insert into round(t_no,u_no,p_try,r_ct,r_date)" ;
+		 sql+= "value()" ;
+		 value
+		 (
+		 1,1,1,1,now()
+		 );
+		 dbmA.OpenQuery(sql);
+
+		 dbmA.CloseQuery();
+		 
+				
+		 /*
+		String sql = "select count(c_no) as cnt2 from count where p_no=?"; 
+		System.out.println(sql);
+		dbm.Excute(sql);
+		psmt.setString(1,p_no);
+		rs.next();
+		*/
+ 
+	 
+	 }catch(Exception e) 
+		{ 
+			e.printStackTrace(); 
+		}finally
+		{
+			dbmA.DBClose();
+		}
+	 %>

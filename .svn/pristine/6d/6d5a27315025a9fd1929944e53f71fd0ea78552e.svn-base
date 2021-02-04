@@ -1,0 +1,95 @@
+@charset "EUC-KR";
+@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
+body
+{
+	background-color: #FFBE0A;
+	-ms-overflow-style: none;
+	font-family: 'NanumSquare', sans-serif;
+}
+
+/*::-webkit-scrollbar { display: none; } 웹페이지 스크롤바 안보이게함.*/
+
+#first
+{
+	position:absolute;
+	top:10px;
+	right:50px;
+}
+#first button
+{
+	font-weight:bold;
+	font-size:20px;
+	color:black;
+}
+.contents
+{
+
+	width :100%;
+	height : 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index:1;
+}
+ul
+{
+	list-style: none;
+}
+li
+{
+	display: inline-block;
+	text-align: center;
+	padding: 60px 250px 0 200px;
+}
+a
+{	
+	font-weight:bold;
+	font-size:20px;
+	color:black;
+}
+a:hover
+{
+	color:white;
+}
+.list1
+{
+	display:none;
+	width:500px;
+	-ms-overflow-style: none;
+}
+.detail
+{
+	display:none;
+}
+.workout
+{
+	position:absolute;
+	top:5%;
+	width:100%;
+	height:950px;
+	background-color: white;
+	padding-top:100px;
+	overflow:auto;
+}
+.workoutcont
+{
+	position:absolute;
+	left:15%;
+	width:30%;
+}
+#leftimg
+{
+	position:fixed;
+	float:left;
+	left:2%;
+	width:250px;
+	height:600px;
+	background-image: url(../images/nike4.jpg);
+	background-repeat: no-repeat;
+}
+#angle_up
+{
+	position:absolute;
+	bottom:6%;
+	right:5%;
+}

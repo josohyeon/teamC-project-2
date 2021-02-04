@@ -1,0 +1,24 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<form id="frm" name="frm" method="post" action="#">
+		<table style="text-align:center; margin:auto;" >
+			<tr>
+				<td><h1>아이디 찾기</h1></td>
+			</tr>
+			<tr>
+				<td>회원가입시 사용한 아이디는 hong123입니다.</td>
+			</tr>		
+			<tr>
+				<td><button type="button" onclick="location.href='../startpage/Firstpage.jsp'">로그인 화면으로 돌아가기</button></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

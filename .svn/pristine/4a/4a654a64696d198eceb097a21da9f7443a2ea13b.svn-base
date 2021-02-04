@@ -1,0 +1,52 @@
+@charset "EUC-KR";
+
+#divResult
+{
+	display:none; 
+	left:38%; 
+	top:40%; 
+	width:500px; 
+	height:200px; 
+	position:absolute; 
+	border: 5px solid gold; 
+	border-radius:10px; 
+	background-color: white;
+}
+#divResult2
+{
+	display:none; 
+	left:38%; 
+	top:40%; 
+	width:500px; 
+	height:200px; 
+	position:absolute; 
+	border: 5px solid gold; 
+	border-radius:10px; 
+	background-color: white;
+}
+.modalhagosipda
+{ 
+	position: fixed; 
+	left: 0; 
+	top: 0; 
+	width: 100%; 
+	height: 100%; 
+	background-color: rgba(0, 0, 0, 0.5); 
+	opacity: 0; 
+	visibility: hidden; 
+	transform: scale(1.1); 
+	transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+}
+.modalhagosipda2
+{ 
+	position: fixed; 
+	left: 0; 
+	top: 0; 
+	width: 100%; 
+	height: 100%; 
+	background-color: rgba(0, 0, 0, 0.5); 
+	opacity: 0; 
+	visibility: hidden; 
+	transform: scale(1.1); 
+	transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+}

@@ -1,0 +1,53 @@
+package user;
+
+import teamC.DBM;
+import teamC.VO;
+
+public class UserDAO 
+{
+
+	public int login(String u_id,String u_pw)
+	{
+		String sql = "select u_pw from user where u_id= "+u_id;
+		u_id = u_id.replaceAll("'", "''");
+		
+		try
+		{
+			DBM dbm = new DBM();
+			dbm.OpenQuery(sql);
+			
+			if(dbm.ResultNext())
+			{
+				if(dbm.getString("u_pw").equals(u_pw))
+					return 1;//로그인 성공
+				else
+					return 0;//비밀번호 틀림
+			}
+			return -1;//아이디 없음
+			
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+			
+		}
+		return -2;//데이터베이스 오류
+	}
+	
+	public int join(VO vo)
+	{
+		String sql = "insert into user values("+ vo.getU_id() + "," + vo.getU_pw()+ "," + vo.getU_email() + "," + vo.getU_emailhash() + ",false) ";
+		
+		try
+		{
+			DBM dbm = new DBM();
+			dbm.Excute(sql);
+			
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return -1;//회원가입 실패
+		
+	}
+	
+}

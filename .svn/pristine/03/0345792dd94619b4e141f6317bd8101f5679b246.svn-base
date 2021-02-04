@@ -1,0 +1,30 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import = "java.sql.DriverManager" %>
+<%@ page import = "java.sql.Connection" %>
+<%@ page import = "java.sql.PreparedStatement" %>
+<%@ page import = "java.sql.ResultSet" %>
+<%@ page import = "java.sql.SQLException" %>
+<%@ page import="teamC.DBM" %>  
+<%@ page import="teamC.VO" %>
+<%
+	//String vp_no = request.getParameter("vp_no");
+	DBM dbm = new DBM();
+	 try 
+	 {
+		dbm.DBOpen();
+		String sql = "select count(c_no) as cnt2 from count where p_no=?"; 
+		System.out.println(sql);
+		dbm.Excute(sql);
+		psmt.setString(1,p_no);
+		rs.next();
+		out.print(rs.getString("cnt2"));
+		}catch(Exception e) 
+		{ 
+			e.printStackTrace(); 
+		}finally
+		{
+			psmt.close();
+			conn.close();
+		}
+	 %>

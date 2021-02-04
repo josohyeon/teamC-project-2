@@ -1,0 +1,113 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link href="../style/MMypage.css" rel="stylesheet" type="text/css">
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+<title>MEMBER MYPAGE</title>
+<script src="../js/jquery-3.5.1.min.js"></script>	
+<script>
+	function DoSecession()
+	{
+		var se = confirm('회원탈퇴를 하시겠습니까?');
+		if(se)
+		{
+			alert("탈퇴가 완료되었습니다.");
+			location.href="../startpage/Firstpage.jsp";
+		}else
+		{
+			alert("탈퇴가 취소되었습니다.");
+		}
+	}
+	
+	function savepw()
+	{
+		alert("변경되었습니다.");
+	}
+	
+	function nickupdate()
+	{
+		$("#nickchange").click(function()
+		{
+			$("#nickline").html("<input type='text' value='조소'>");
+		})
+	}
+	
+	function nicksavecomplete()
+	{
+		$("#nicksave").click(function()
+		{
+			$("#nickline").html("조소");
+		})
+	}
+	
+</script>
+</head>
+<style>
+
+</style>
+<body>
+	<!-- 상단 로그아웃 버튼 -->
+	<div id="first">
+		<button type="button" class="btn btn-link" onclick="location.href='../startpage/Firstpage.jsp'">LOGOUT</button>
+	</div>
+	
+	<!-- 상단 메뉴바 -->
+	<div class="container">
+		<ul>
+			<li>
+				<div>
+					<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span><a href="../m-record/M-Record.jsp">&nbsp;내 PT 기록</a>
+				</div>
+			</li>
+			<li>
+				<div>
+				<span class="glyphicon glyphicon-link" aria-hidden="true"></span><a href="../m-mypage/M-Trainerview.jsp">&nbsp;트레이너 보기</a>
+				</div>
+			</li>
+			<li>
+				<div>
+					<span class="glyphicon glyphicon-user" aria-hidden="true"></span><a href="../m-mypage/M-Mypage.jsp">&nbsp;마이페이지</a>			
+				</div>
+			</li>
+		</ul>
+	</div>
+	
+	<!-- 정보가 보이는 부분 -->
+	<div class="info">
+		<form id="frm" name="frm" method="post" action="Trainersearchok.jsp">
+			<table style="width:700px; height:700px; text-align:left; margin: auto;">
+				<tr style="height:100px;">
+					<th>닉네임</th>
+					<td id="nickline">조소현</td>
+					<td>
+						<input type="button" class="btn btn-dark" id="nickchange" value="수정" onclick="nickupdate()">
+						<input type="button" class="btn btn-dark" id="nicksave" value="저장" onclick="nicksavecomplete()">
+					</td>
+				</tr>
+				<tr style="height:100px;">
+					<th>아이디</th>
+					<td colspan="2">joso1***</td>
+				</tr>
+				<tr style="height:100px;">
+					<th>비밀번호</th>
+					<td colspan="2">*****</td>
+				</tr>
+				<tr style="height:100px;">
+					<th>비밀번호 변경</th>
+					<td colspan="2"><input type="password" class="form-control" value="******"><input type="button" class="btn btn-dark" value="변경" onclick="savepw()"></td>
+				</tr>
+				<tr style="height:100px;">
+					<th>E-mail</th>
+					<td colspan="2">joso@gmail.com</td>
+				</tr>
+				<tr>
+					<td colspan="3"><input type="button" class="btn btn-dark" onclick="javascript:DoSecession()" value="회원탈퇴"></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>

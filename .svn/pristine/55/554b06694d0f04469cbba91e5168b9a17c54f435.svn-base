@@ -1,0 +1,122 @@
+<%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*" %>
+<%@ page import="java.util.*" %>
+<%@ page import="teamC.DBM" %>  
+<%@ page import="teamC.VO" %>
+<link href="../style/TRecordpage.css" rel="stylesheet" type="text/css">
+
+<% 
+String u_no = request.getParameter("u_no");
+u_no = "1";
+
+DBM dbm = new DBM();
+
+dbm.DBOpen();
+// while 문을 돌려야 할듯 
+String sql = "" ;
+sql = "select e_no,r_ct,e_name,e_set,e_cnt,e_kg,e_time,e_part,e_rest " ;
+sql +="from exercise where u_no = "+u_no ;
+
+dbm.OpenQuery(sql);
+
+dbm.ResultNext();
+
+String e_no = dbm.getString("e_no"); // 운동 관리번호 
+String r_ct = dbm.getString("r_ct"); // 운동 회차 
+String e_name = dbm.getString("e_name"); // 운동이름
+String e_set = dbm.getString("e_set"); // 세트수
+String e_cnt = dbm.getString("e_cnt"); // 횟수
+String e_kg = dbm.getString("e_kg"); // 무게
+String e_time = dbm.getString("e_time"); // 소요시간
+String e_part = dbm.getString("e_part"); // 부위
+String e_rest = dbm.getString("e_rest"); // 휴식시간
+
+DBM dbm2 = new DBM();
+
+dbm2.DBOpen();
+sql = "select r_date from round where u_no = " +u_no ;
+dbm2.OpenQuery(sql);
+dbm2.ResultNext();
+String r_date= dbm2.getString("r_date");
+%>
+<div style="float:right; right:50%; margin-right:300px;" id="">
+<div style=" text-align:center; width:30vh" id="exerciser">
+<span><%=r_ct %>회차<%=r_date %></span>
+<table style="width:60vh; height:300px; text-align:center; margin:auto;">
+	<tr>
+		<th rowspan="5"><input type="text" class="form-control" id='e_name' value='' placeholder="운동명"></th>
+		<th>세트</th>
+		<th>횟수</th>
+		<th>무게</th>
+	</tr>
+	<tr>
+		<td><input type="text" class="form-control" id='e_set' value=''>세트</td>
+		<td><input type="text" class="form-control" id='e_cnt' value=''>회</td>
+		<td><input type="text" class="form-control" id='e_kg' value=''>kg</td>
+	</tr>
+
+<!-- 간격을 위해 임의로 넣은것 -->
+	<tr>
+		<th>&nbsp;</th>
+		<th>&nbsp;</th>
+		<th>&nbsp;</th>
+	</tr>
+	
+	<tr>
+		<th>소요시간</th>
+		<th>자극부위</th>
+		<th>세트간 휴식</th>
+	</tr>
+	<tr>
+		<td><input type="text" class="form-control" id='e_time' value=''>분</td>
+		<td><input type="text" class="form-control" id='e_part' value=''>&nbsp;</td>
+		<td><input type="text" class="form-control" id='e_rest' value=''>초</td>
+	</tr>
+	<tr style="text-align:right">
+		<td colspan="4"><input type='button' class="btn btn-dark" id="records" onclick="recordsave()" value='저장'></td>
+	</tr>
+</table>
+</div>
+<div style="margin-top:10vh;">
+<table style="width:60vh; height:300px; text-align:center; margin:auto;">
+	<tr>
+		<th rowspan="5"><%=e_name%></th>
+		<th>세트</th>
+		<th>횟수</th>
+		<th>무게</th>
+	</tr>
+	<tr>
+		<td><%=e_set%></td>
+		<td><%=e_cnt%></td>
+		<td><%=e_kg%></td>
+	</tr>
+
+<!-- 간격을 위해 임의로 넣은것 -->
+	<tr>
+		<th>&nbsp;</th>
+		<th>&nbsp;</th>
+		<th>&nbsp;</th>
+	</tr>
+	
+	<tr>
+		<th>소요시간</th>
+		<th>자극부위</td>
+		<th>세트간 휴식</th>
+	</tr>
+	<tr>
+		<td><%=e_time%></td>
+		<td><%=e_part%></td>
+		<td><%=e_rest%></td>
+	</tr>
+	<tr style="text-align:right">
+		<td colspan="4"><button onclick='r_modify()' class="btn btn-dark">수정</button></td>
+		</tr>
+	</table>
+	</div>
+</div>	
+<%
+dbm.CloseQuery();
+dbm.DBClose();
+dbm2.CloseQuery();
+dbm2.DBClose();
+%>

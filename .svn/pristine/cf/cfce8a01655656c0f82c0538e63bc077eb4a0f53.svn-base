@@ -1,0 +1,20 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("UTF-8");
+	String c_id = null;
+	
+	c_id = (String)request.getParameter("c_id");
+	
+		
+/* 	PrintWriter script = response.getWriter();
+	script.println("<script>");
+	script.println("alert('탈퇴처리되었습니다.새로고침 해주세요');");
+	script.println("history.back();");
+	script.println("</script>");
+	script.close(); */
+%>
+<form id="frm" name = "frm" method="post" action="u_changeOK.jsp?c_id=<%= c_id %>">
+	새 비밀번호 : <input type ="password" id="pw" name="pw">
+	<input type="submit" value="확인">
+</form>

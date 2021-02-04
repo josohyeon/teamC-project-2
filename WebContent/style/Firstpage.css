@@ -1,0 +1,80 @@
+@charset "EUC-KR";
+@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
+body
+{
+	font-family: 'NanumSquare', sans-serif;
+}
+input[type=password] 
+{
+	font-family: "Geogia";
+	&::placeholder {font-family: "NanumSquare";}
+}
+#logo
+{
+	cursor: pointer;
+}
+#first
+{
+	position:absolute;
+	top:10px;
+	right:50px;
+}
+#first button
+{
+	font-weight:bold;
+	font-size:15px;
+}
+.backimg
+{	
+	margin-top:50;
+	width:100%;
+	height:700px;
+	background-image: url(../images/background.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+.content
+{
+	position:absolute;
+	top:25%;
+	left:10%;
+	transform:traslate(-50%, -50%);
+	color:white;
+	z-index:2;
+	text-align:center;
+}
+#maincontent
+{
+	font-weight:bold;
+	font-size:70px;
+}
+span
+{
+	font-weight:bold;
+	font-size:30px;
+}
+.contentbody
+{
+
+	width :100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index:1;
+	margin:0;
+}
+ul
+{	
+	list-style: none;
+}
+li
+{
+	width:300px;
+	display: inline-block;
+	text-align: center;
+	margin:50px 250px 0px 250px;
+}
+h3
+{
+	display:inline;
+}

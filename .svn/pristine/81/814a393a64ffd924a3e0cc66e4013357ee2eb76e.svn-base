@@ -1,0 +1,114 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link href="../style/Findpage.css" rel="stylesheet" type="text/css">
+<title>ID/PW FIND</title>
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+<script src="../js/jquery-3.5.1.min.js"></script>
+<script>
+
+	function DoFindID()
+	{
+		$("#tdResult").html("검색하신 아이디는 xyz*** 입니다.");
+		$("#divResult").toggle();
+	}
+	
+	function DoFindPW()
+	{
+		$("#tdResult2").html("비밀번호 찾기는 관리자에게 문의하여 주시기 바랍니다.");
+		$("#divResult2").toggle();
+	}
+	
+</script>
+</head>
+<style>
+
+</style>
+<body>
+	<!-- 상단버튼 -->
+	<div id="first">
+		<button type="button" class="btn btn-link" onclick="location.href='../startpage/Firstpage.jsp'">BACK</button>
+	</div>
+	
+	<!-- ID / PW 찾는 부분 -->
+	<div class="find">
+		<div id="findtitle">
+			<span>ID / PW 찾기</span>
+		</div>
+		<ul>
+			<li>
+				<form id="" name="" method="post" action="">
+				<table style="width:500px; height:300px;">
+					<tr>
+						<td style="font-size:20px; font-weight:bold;">가입시 입력하신 이메일을 통해 찾을 수 있습니다.</td>
+					</tr>
+					<tr>
+						<td><input type="text" class="form-control" placeholder="닉네임"></td>
+					</tr>
+					<tr>
+						<td><input type="email" class="form-control" placeholder="이메일"></td>
+					</tr>
+					<tr>
+						<td><input type="button" class="btn btn-dark" value="찾기" onclick="javascript:DoFindID();"></td>
+					</tr>
+				</table>
+				</form>
+			</li>
+			<li>
+				<form id="" name="" method="post" action="">
+				<table style="width:500px; height:300px">
+					<tr>
+						<td style="font-size:20px; font-weight:bold;">아이디, 이메일을 통해 찾을 수 있습니다.<p/></td>
+					</tr>
+					<tr>
+						<td><input type="text" class="form-control" placeholder="아이디"></td>
+					</tr>
+					<tr>
+						<td><input type="text" class="form-control" placeholder="닉네임"></td>
+					</tr>
+					<tr>
+						<td><input type="email" class="form-control" placeholder="이메일"></td>
+					</tr>
+					<tr>
+						<td><input type="button" class="btn btn-dark" value="찾기" onclick="javascript:DoFindPW();"></td>
+					</tr>
+				</table>
+				</form>
+			</li>
+		</ul>	
+	</div>
+	
+	<!-- ID 찾은 결과 나오는 부분 -->
+	<div  id="divResult" name="divResult" style="display:none; left:38%; top:40%; width:500px; position:absolute; border: 1px solid gold; background-color: #FFFFF0;">
+		<table style="width:100%; cellpadding:3; cellspacing:3;">
+			<tr>
+				<td align="right" height="28" bgcolor="#f4f4f4">[ <a href="javascript:$('#divResult').toggle();">닫기</a> ]&nbsp;&nbsp;</td>
+			</tr>
+			<tr>
+				<td bgcolor="gold" height="1"></td>
+			</tr>
+			<tr>
+				<td height="100" id="tdResult" align="center" name="tdResult"></td>
+			</tr>
+		</table>	
+	</div>
+	
+	<!-- PW 찾은 결과 나오는 부분 -->
+	<div  id="divResult2" name="divResult" style="display:none; left:38%; top:40%; width:500px; position:absolute; border: 1px solid gold; background-color: #FFFFF0;">
+		<table style="width:100%; cellpadding:3; cellspacing:3;">
+			<tr>
+				<td align="right" height="28" bgcolor="#f4f4f4">[ <a href="javascript:$('#divResult2').toggle();">닫기</a> ]&nbsp;&nbsp;</td>
+			</tr>
+			<tr>
+				<td bgcolor="gold" height="1"></td>
+			</tr>
+			<tr>
+				<td height="100" id="tdResult2" align="center" name="tdResult"></td>
+			</tr>
+		</table>	
+	</div>
+	
+</html>

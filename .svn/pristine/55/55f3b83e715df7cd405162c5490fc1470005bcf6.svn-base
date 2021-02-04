@@ -1,0 +1,16 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="teamC.DBM" %>
+<%@ page import="search.trainerSearchDAO" %>
+<%@ page import="teamC.VO" %>
+<%
+request.setCharacterEncoding("UTF-8");
+
+String a = request.getParameter("t_nick");
+
+trainerSearchDAO dao = new trainerSearchDAO();
+
+VO vo = dao.tSearchDAO(a);
+
+out.print(vo.getT_nick());
+%>

@@ -1,0 +1,234 @@
+package trainer;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import teamC.DBM;
+import teamC.VO;
+
+public class TrainerSearchDAO {
+
+	Connection        conn;
+	PreparedStatement pstmt;
+	ResultSet         rs;
+	
+	//트레이너 목록보여주는 DAO
+	public List<VO> tSearchDAO(String t_nick, String u_id)
+	{
+		String sql = "select u_no from user where u_id = ?";
+		
+		//System.out.println("sql"+sql);
+		DBM dbm = new DBM();
+		dbm.DBOpen();
+		conn = dbm.getConn();
+		
+		Connection        conn2;
+		DBM dbm2 = new DBM();
+		dbm2.DBOpen();
+		conn2 = dbm2.getConn();
+		
+		List<VO> resultList = new ArrayList<VO>();
+		try 
+		{
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, u_id);
+			rs = pstmt.executeQuery();
+			rs.next();
+			int u_no = rs.getInt("u_no");
+			rs.close();
+			pstmt.close();
+			
+			//PT상태에 따라 불러오는 부분
+			sql  = "select t.t_no,                                        		 ";
+			sql += "       t.t_nick,                                      		 ";
+			sql += "       t.t_addr1,                                     		 ";
+			sql += "	   t.t_addr2,                                    	  	 ";
+			sql += "	   (select avg(p.p_score)                         		 ";
+			sql += "	      from pt p                                   		 ";
+			sql += "		 where p.t_no = t.t_no                        		 ";
+			sql += "		   and p.p_state = 'c') as t_score,           		 ";
+			sql += "	   (select p_try                                  		 ";
+			sql += "	      from pt                                     		 ";
+			sql += "	     where t_no=t.t_no                            		 ";
+			sql += "   	       and u_no ="+u_no+"                         		 ";
+			sql += "           and p_try = (select max(p_try)             		 ";
+			sql += "                          from pt                     		 ";
+			sql += "                         where t_no = t.t_no          		 ";
+			sql += "                           and u_no = "+u_no+"))  as p_try,  ";
+			sql += "	   (select p_end                                  		 ";
+			sql += "	      from pt                                     		 ";
+			sql += "	     where t_no=t.t_no                            		 ";
+			sql += "   	       and u_no ="+u_no+"                         		 ";
+			sql += "           and p_try = (select max(p_try)             		 ";
+			sql += "                          from pt                     		 ";
+			sql += "                         where t_no = t.t_no          		 ";
+			sql += "                           and u_no = "+u_no+"))  as p_end,	 ";		
+			sql += "	   (select p_state                                  	 ";
+			sql += "	      from pt                                     		 ";
+			sql += "	     where t_no=t.t_no                            		 ";
+			sql += "   	       and u_no ="+u_no+"                         		 ";
+			sql += "           and p_try = (select max(p_try)             		 ";
+			sql += "                          from pt                     		 ";
+			sql += "                         where t_no = t.t_no          		 ";
+			sql += "                           and u_no = "+u_no+"))  as p_state, ";	
+			sql += "	   (select p_cnt                                     	 ";
+			sql += "	      from pt                                     		 ";
+			sql += "	     where t_no=t.t_no                            		 ";
+			sql += "   	       and u_no ="+u_no+"                         		 ";
+			sql += "           and p_try = (select max(p_try)             		 ";
+			sql += "                          from pt                     		 ";
+			sql += "                         where t_no = t.t_no          		 ";
+			sql += "                           and u_no = "+u_no+"))  as p_cnt   ";	
+			sql += "  from trainer t                                      		 ";
+			sql += " where t.t_nick like '%" + t_nick + "%'               		 ";
+			
+			System.out.println(sql);
+			PreparedStatement pstmt2 = conn2.prepareStatement(sql);
+			ResultSet rs2 = pstmt2.executeQuery();
+			while(rs2.next()) 
+			{
+				VO vo = new VO(); // vo마다 데이터를 담기위해 while문 안에 vo 생성.
+				vo.setP_end(rs2.getString("p_end"));
+				vo.setP_cnt(rs2.getString("p_cnt"));
+				vo.setP_state(rs2.getString("p_state"));
+				vo.setP_try(rs2.getInt("p_try"));
+				vo.setT_no(rs2.getInt("t_no"));
+				vo.setT_nick(rs2.getString("t_nick"));
+				vo.setT_addr1(rs2.getString("t_addr1"));
+				vo.setT_addr2(rs2.getString("t_addr2"));
+				vo.setT_score(rs2.getDouble("t_score"));
+				resultList.add(vo);
+			}
+			rs2.close();
+			pstmt2.close();
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}finally 
+		{
+			dbm.DBClose();
+			dbm2.DBClose();
+		}
+		return resultList;
+	}
+	
+	//PT 신청하는 DAO
+	public int tApplyDAO(String u_id, String t_no, String p_cnt) 
+	{
+		String sql = "select u_no from user where u_id = ?";
+		DBM dbm = new DBM();
+		dbm.DBOpen();
+		conn = dbm.getConn();
+		
+		Connection        conn2;
+		DBM dbm2 = new DBM();
+		dbm2.DBOpen();
+		conn2 = dbm2.getConn();
+		
+		Connection        conn3;
+		DBM dbm3 = new DBM();
+		dbm3.DBOpen();
+		conn3 = dbm3.getConn();
+		ResultSet         rs2;
+		try 
+		{
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, u_id);
+			rs = pstmt.executeQuery();
+			rs.next();
+			int u_no = rs.getInt("u_no");
+			rs.close();
+			pstmt.close();
+			
+			int pTry = 1;
+			//조건추가
+			String sPTry = "";
+			sql = "select max(p_try) as p_try from pt where t_no="+Integer.parseInt(t_no)+" and u_no = "+u_no;
+			PreparedStatement pstmt2 = conn2.prepareStatement(sql);
+								 rs2 = pstmt2.executeQuery();
+			rs2.next();
+			sPTry = rs2.getString("p_try");
+			rs2.close();
+			pstmt2.close();
+			//이미 신청한적 있던 회원이 재신청을 하는 경우
+			if(sPTry == null) 
+			{	
+				//첫번째 조건 p_try가 널인 경우 신청한적 없는 회원
+				// p_try 1로 insert
+				sql  = "insert into pt ";
+				sql += "(t_no,u_no,p_state,p_send,p_try,p_cnt) ";
+				sql += "values ";
+				sql += "("+Integer.parseInt(t_no)+","+u_no+",'a',now(),"+pTry+","+Integer.parseInt(p_cnt)+")";
+			}else 
+			{	
+				//두번째 조건 p_try가 널이 아닌 경우
+				//p_try +1 해서 insert
+				sql  = "insert into pt ";
+				sql += "(t_no,u_no,p_state,p_send,p_try,p_cnt) ";
+				sql += "values ";
+				sql += "("+Integer.parseInt(t_no)+","+u_no+",'a',now(),"+(Integer.parseInt(sPTry)+1)+","+Integer.parseInt(p_cnt)+")";
+			}
+		
+			PreparedStatement pstmt3 = conn3.prepareStatement(sql);
+						  int result = pstmt3.executeUpdate(sql);
+			pstmt3.close();
+			
+			return result;
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+			return -1;
+		}finally 
+		{
+			dbm.DBClose();
+			dbm2.DBClose();
+			dbm3.DBClose();
+		}
+	}
+	
+	//PT신청상태일때 PT신청을 회원이 취소하는 DAO
+	public int tCancelDAO(String u_id, String t_no, String pCnt) 
+	{
+		String sql = "select u_no from user where u_id = ?";
+		DBM dbm = new DBM();
+		dbm.DBOpen();
+		conn = dbm.getConn();
+		
+		Connection        conn2;
+		DBM dbm2 = new DBM();
+		dbm2.DBOpen();
+		conn2 = dbm2.getConn();
+		
+		try 
+		{
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, u_id);
+			rs = pstmt.executeQuery();
+			rs.next();
+			int u_no = rs.getInt("u_no");
+			rs.close();
+			pstmt.close();
+			
+			sql = "delete from pt where u_no = "+u_no+" and t_no = "+Integer.parseInt(t_no)+" and p_cnt = "+Integer.parseInt(pCnt);
+			PreparedStatement pstmt2 = conn2.prepareStatement(sql);
+			/*
+			 * pstmt2.setInt(1, u_no); pstmt2.setInt(2, Integer.parseInt(t_no));
+			 * pstmt2.setInt(3, Integer.parseInt(pCnt));
+			 */
+			int result = pstmt2.executeUpdate(sql);
+			pstmt2.close();
+			return result;
+		}catch(Exception e) 
+		{
+			e.printStackTrace();
+			return -1;
+		}finally 
+		{
+			dbm.DBClose();
+			dbm2.DBClose();
+		}
+	}
+}

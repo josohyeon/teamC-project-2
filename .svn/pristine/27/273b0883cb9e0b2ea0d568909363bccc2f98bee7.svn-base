@@ -1,0 +1,90 @@
+package exercise;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import teamC.DBM;
+import teamC.VO;
+import util.Utility;
+
+public class ExerciseDAO 
+{
+	Connection        conn;
+	PreparedStatement pstmt;
+	ResultSet         rs;	
+
+	
+	public int login(String t_id,String t_pw)
+	{
+		String sql = "select t_pw from trainer where t_id = ?";
+		
+		System.out.println(sql);
+		
+		DBM dbm = new DBM();
+		dbm.DBOpen();
+		conn = dbm.getConn();
+		try
+		{
+			//dbm.OpenQuery(sql)
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, t_id);
+			rs = pstmt.executeQuery();
+			if(dbm.ResultNext())
+			{
+				if(rs.getString("t_pw").equals(Utility.encoding(t_pw)))
+					return 1;//로그인 성공
+				else
+					return 0;//비밀번호 틀림
+			}
+			return -1;//아이디 없음
+			
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+			
+		}
+		dbm.DBClose();
+		return -2;//데이터베이스 오류
+	}
+	
+	public int join(VO vo)
+	{
+		String sql = "";  
+		sql += "insert into trainer ";
+		sql += "(t_id,t_nick,t_pw,t_email,t_phone, t_joindate, t_major, t_addr1, t_addr2, t_state) ";
+		sql = sql + "values ";
+		sql = sql + "(?,?,?,?,?,NOW(),?,?,?,'Y') ";
+	
+		System.out.println(sql);
+		DBM dbm = new DBM();
+		dbm.DBOpen();
+		conn = dbm.getConn();
+		
+		try
+		{
+			String pw = Utility.encoding(vo.getT_pw());
+			//dbm.Excute(sql)
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getT_id());
+			pstmt.setString(2, vo.getT_nick());
+			pstmt.setString(3, pw);
+			pstmt.setString(4, vo.getT_email());
+			pstmt.setString(5, vo.getT_phone());
+			pstmt.setString(6, vo.getT_major());
+			pstmt.setString(7, vo.getT_addr1());
+			pstmt.setString(8, vo.getT_addr2());					
+			return pstmt.executeUpdate();
+			
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		dbm.DBClose();
+		return -1;//회원가입 실패
+		
+	}
+	
+	
+}
+

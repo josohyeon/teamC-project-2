@@ -1,0 +1,162 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<link href="../style/Logo&Login.css" rel="stylesheet" type="text/css">
+<link href="../style/Navi.css" rel="stylesheet" type="text/css">
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<script src="../js/jquery-3.5.1.min.js"></script>
+<script>
+	function infomodify()
+	{
+		$(".infou1").html("<input type='text'>");
+		$(".infou2").html("<input type='text'>");
+		$(".infou3").html("1회&nbsp;<input type='text'>원");
+		$(".infou4").html("10회&nbsp;<input type='text'>원");
+		$(".infou5").html("20회&nbsp;<input type='text'>원");
+		$("#major").html("<select><option>헬스</option><option>다이어트</option><option>재활치료</option></select>");
+		$("#addr").html("<input type='text'><input type='text'><button>주소찾기</button>");
+		$("#modify").attr('value','수정완료').attr('onclick','infomodifyok()')
+	}
+	
+	function infomodifyok()
+	{	
+		$(".infou1").html("홍은표");
+		$(".infou2").html("열심히 가르칩니다.");
+		$(".infou3").html("1회     50000원");
+		$(".infou4").html("10회     450000원");
+		$(".infou5").html("20회     800000원");
+		$("#major").html("헬스");
+		$("#addr").html("전북 전주시 덕진구 권삼득로 244 바디AS피트니스");
+		$("#modify").attr('value','수정').attr('onclick','infomodify()')
+	}
+</script>
+<style>
+body 
+{
+    margin:20px auto;
+    padding: 0;
+    font-family:"맑은 고딕";
+    font-size:0.9em;
+}
+header
+{			
+	height:12vh;	
+}
+.logo
+{
+	width:80px;
+	height:80px;
+}
+.btn1
+{
+	margin-left:920px;
+}
+section
+{
+margin: 50px 400px 0px;
+}
+td
+{
+	padding: 30px;
+}
+tbody
+{
+text-align:center;
+}
+.btndiv
+{	width:1300px;
+    margin-top: 30px;
+}
+.btn3,.btn4
+{
+	width:200px;
+	height:40px;
+}
+.btn4
+{
+	margin-left:600px;
+}
+</style>
+<body>
+	<header>
+		<img src="../images/logo.png" class="logo" onclick="location.href='../t-mainpage/T-Mainpage.jsp'">
+		<div id="lojo">
+			<a>홍은표</a><span>님 환영합니다.</span>
+			<p>
+			<span><a href='../startpage/Firstpage.jsp'>로그아웃</a></span>
+		</div>
+	</header>
+	<nav>
+	   <ul id="navi">
+			<li class="group">
+	            <ul class="sub">
+	                <li><a href="../t-manegement/T-Record.jsp">회원관리</a></li>
+	                <li><a href="../t-mypage/T-Mypage.jsp">PT프로필</a></li>
+	                <li><a href="../t-mypage/T-Modify.jsp">내 정보</a></li>
+	            </ul>
+	        </li>     
+   	 	</ul>
+   	 </nav>
+		<section>
+			<article>
+			<span style="font-size:35px; font-weight:bold;">PT프로필</span>
+				<table id="trainerinfo" border="1">
+					<thead>
+						<tr>
+							<td>전문분야</td>
+							<td id="major">헬스</td>
+						</tr>
+						<tr>
+							<td>근무지</td>
+							<td id="addr">전북 전주시 덕진구 권삼득로 244 바디AS피트니스</td>
+						</tr>
+						<tr>			
+							<td>트레이너(닉네임)</td> 
+							<td class="infou1">홍은표</td>				
+						</tr>
+						<tr class="topdiv">
+							<td class="imghover">
+								<img src="../images/Trainer.jpg">
+								<button>사진 변경</button>
+							</td>
+							<td class="infou2">열심히 가르칩니다.</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td colspan="2">가격 </td>
+						</tr>	
+						<tr>
+							<td colspan="2" class="infou3">1회     50000원</td>
+						</tr>
+						<tr>		
+							<td colspan="2" class="infou4">10회     450000원</td>
+						</tr>
+						<tr>		
+							<td colspan="2" class="infou5">20회     800000원</td>
+						</tr>		
+						<tr>
+							<td colspan="3">
+								★★★★☆(28)
+							</td>
+						</tr>
+						<tr style="text-align:right;">
+							<td colspan="3"><input type="button" id="modify" value="수정" onclick="javascript:infomodify()"></td><!-- ajax로 해야함 -->
+						</tr>
+					</tbody>	
+				</table>
+			<!-- 수정해야함 
+1. 자기정보가 바로 보이면 안됭 닉네임만 보이고 수정버튼 으로 구현 해야함 
+2. 트레이너 선택버튼이 있어야함(트레이너 닉네임 입력후 요청보내면 트레이너가 수락해서 pt시작)
+2-1 트레이너 닉네임 입력하면 트레이너 마이페이지 정보를 보여준후 선택하기 버튼 제공 ajax 
+2-2 완료 후  트레이너 정보 보여주기 
+-->
+			</article>
+		</section>
+		<img src="../images/chat3.png" style="width:60px; position:absolute; bottom:10px; right:50px" onclick="location.href='../chat/Chat.jsp'">
+</body>
+</html>

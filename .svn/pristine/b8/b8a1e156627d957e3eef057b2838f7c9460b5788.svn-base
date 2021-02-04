@@ -1,0 +1,25 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<table style="margin:auto; text-align:center; padding-top:120px" >
+		<tr>
+			<td>
+			<table style="margin:auto; text-align:center">
+				<tr>
+					<td><img src="../images/logo.png" id="logo" width="500px" height="500px"></td>
+				</tr>
+				<tr>
+					<td><h1>현재 준비중입니다.</h1><a href="javascript:window.history.back()">뒤로가기</a></td>
+				</tr>
+			</table>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

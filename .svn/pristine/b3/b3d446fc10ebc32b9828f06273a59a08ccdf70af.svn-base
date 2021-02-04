@@ -1,0 +1,110 @@
+@charset "EUC-KR";
+@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
+body
+{
+	font-family: 'NanumSquare', sans-serif;
+}
+#logo
+{
+	cursor: pointer;
+}
+#first
+{
+	position:absolute;
+	top:5px;
+	right:50px;
+}
+#first button
+{
+	font-weight:bold;
+	font-size:20px;
+	color:#1E3269;
+	text-decoration: none;
+}
+.backimg
+{	
+	margin-top:50;
+	width:100%;
+	height:700px;
+	background-image: url(../images/background3.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+.content
+{
+	position:absolute;
+	top:50%;
+	left:10%;
+	transform:traslate(-50%, -50%);
+	color:white;
+	z-index:2;
+	text-align:center;
+}
+#maincontent
+{
+	font-weight:bold;
+	font-size:60px;
+}
+span
+{
+	font-weight:bold;
+	font-size:30px;
+}
+.contents
+{
+
+	width :100%;
+	height : 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index:1;
+}
+ul
+{
+	list-style: none;
+}
+li
+{
+	display: inline-block;
+	text-align: center;
+	padding: 250px 150px 0 150px;
+}
+li a
+{	
+	width: 200px;
+	height: 70px;
+	font-weight:bold;
+	font-size:50px;
+	color:#1E3269;
+}
+li a:link{text-decoration: none;}
+li a:hover{color:#990000}
+#promotionBanner
+{
+	position:absolute;
+	top:15%;
+	left:10%;
+	width: 300px; 
+	height: 150px; 
+	background-color:#990000;
+	border-radius: 10px;
+}
+.popContents
+{
+	width: 100%;
+	margin:auto;
+	padding-top:20%;
+	font-size:20px;
+	font-weight:bold;
+	text-align: center;
+}
+.popContents a:link{color: black; text-decoration: none;}
+.popContents a:hover{color:white;}
+.popClose
+{
+	position:absolute;
+	top:10px;
+	right:10px;
+	padding: 0;
+}

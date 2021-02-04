@@ -1,0 +1,69 @@
+package exercise;
+
+public class ExerciseVO 
+{
+	private int e_no;
+	private String e_name;
+	private int e_set;
+	private int e_cnt;
+	private int e_kg;
+	private int e_time;
+	private String e_part;
+	private int e_rest;
+	
+	
+	
+	public ExerciseVO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public int getE_no() {
+		return e_no;
+	}
+	public void setE_no(int e_no) {
+		this.e_no = e_no;
+	}
+	public String getE_name() {
+		return e_name;
+	}
+	public void setE_name(String e_name) {
+		this.e_name = e_name;
+	}
+	public int getE_set() {
+		return e_set;
+	}
+	public void setE_set(int e_set) {
+		this.e_set = e_set;
+	}
+	public int getE_cnt() {
+		return e_cnt;
+	}
+	public void setE_cnt(int e_cnt) {
+		this.e_cnt = e_cnt;
+	}
+	public int getE_kg() {
+		return e_kg;
+	}
+	public void setE_kg(int e_kg) {
+		this.e_kg = e_kg;
+	}
+	public int getE_time() {
+		return e_time;
+	}
+	public void setE_time(int e_time) {
+		this.e_time = e_time;
+	}
+	public String getE_part() {
+		return e_part;
+	}
+	public void setE_part(String e_part) {
+		this.e_part = e_part;
+	}
+	public int getE_rest() {
+		return e_rest;
+	}
+	public void setE_rest(int e_rest) {
+		this.e_rest = e_rest;
+	}
+		
+}

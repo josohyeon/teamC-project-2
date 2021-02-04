@@ -1,0 +1,18 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="teamC.DBM" %>
+<%@ page import="trainer.TrainerSearchDAO" %>
+<%
+request.setCharacterEncoding("UTF-8");
+
+String u_id = null;
+if(session.getAttribute("u_id") != null)
+{
+	u_id = (String) session.getAttribute("u_id");
+}
+
+String T = (String)request.getParameter("t_no");
+
+TrainerSearchDAO dao = new TrainerSearchDAO();
+
+%>
